@@ -1,5 +1,6 @@
 package com.study.aos
 
+import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -18,7 +19,7 @@ import com.google.firebase.messaging.RemoteMessage
 import com.bumptech.glide.request.transition.Transition
 
 
-class FirebaseMessagingService : FirebaseMessagingService() {
+class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     // 메세지 수신 시 마다 해당 메소드 호출됨.
     override fun onMessageReceived(remoteMessage: RemoteMessage){
@@ -27,6 +28,7 @@ class FirebaseMessagingService : FirebaseMessagingService() {
         //받은 remoteMessage의 값 출력해보기.
         Log.d("FirebaseMessagingService*************", "Message data : ${remoteMessage.data}")
         Log.d("FirebaseMessagingService*************", "Message noti : ${remoteMessage.notification}")
+
 
         //알림 메세지의 경우.
         remoteMessage.notification?.let {
@@ -55,7 +57,7 @@ class FirebaseMessagingService : FirebaseMessagingService() {
         val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(
-            this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT
+            this, (System.currentTimeMillis()/1000).toInt(), intent, PendingIntent.FLAG_UPDATE_CURRENT
         )
 
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -93,7 +95,7 @@ class FirebaseMessagingService : FirebaseMessagingService() {
 
         }
 
-        notificationManager.notify(100, notificationBuilder.build() )
+        notificationManager.notify((System.currentTimeMillis()/1000).toInt(), notificationBuilder.build() )
     }
 
     //데이터 메세지 _ 백/포 전부 이걸로 처리. _ notification 구현.
@@ -101,7 +103,7 @@ class FirebaseMessagingService : FirebaseMessagingService() {
         val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(
-            this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT
+            this, (System.currentTimeMillis()/1000).toInt(), intent, PendingIntent.FLAG_UPDATE_CURRENT
         )
 
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -137,7 +139,7 @@ class FirebaseMessagingService : FirebaseMessagingService() {
                 })
 
         }
-        notificationManager.notify(100, notificationBuilder.build() )
+        notificationManager.notify((System.currentTimeMillis()/1000).toInt(), notificationBuilder.build() )
 
     }
 

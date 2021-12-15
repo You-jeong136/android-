@@ -45,7 +45,7 @@
 
         <!-- 백 외에 포그라운드에서도 알림 수신 등을 하기 위해 firebaseMessagingService 상속하는 서비스 필요 -->
         <service
-            android:name=".FirebaseMessagingService"
+            android:name=".MyFirebaseMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>

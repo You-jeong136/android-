@@ -18,6 +18,10 @@ import com.bumptech.glide.request.target.CustomTarget
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.bumptech.glide.request.transition.Transition
+import androidx.core.app.NotificationManagerCompat
+
+
+
 
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
@@ -106,6 +110,15 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     //데이터 메세지 _ 백/포 전부 이걸로 처리. _ notification 구현.
     private fun sendDataMessage(data: MutableMap<String, String>) {
+        /*그룹 설정하기.
+        1. 그룹핑할 아이디 설정
+        2. 이후 notiBuilder에 setGroup(id)로 추가
+        // 그룹 요약 추가하기
+        3. summary notification 생성 < 안 할 경우, 개별 알람처럼 표시됨.
+         */
+
+        val NOTI_GROUP_ID = "com.study.aos.noti_group"
+
         val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(
@@ -119,10 +132,12 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         val notificationBuilder = NotificationCompat.Builder(this, CHANNEL_ID)
         notificationBuilder.setContentTitle(data["title"])
             .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setSubText("SubText 줄")
             .setContentText(data["message"])
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
+            .setGroup(NOTI_GROUP_ID)
 
         //큰 이미지가 따로 올 경우. notification에 imageUrl이 들어있을 경우
         if(data["image"] != null) {
@@ -145,8 +160,23 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                 })
 
         }
-        notificationManager.notify((System.currentTimeMillis()/1000).toInt(), notificationBuilder.build() )
 
+        //summary notification 생성
+        val notiSummaryBuilder = NotificationCompat.Builder(this, CHANNEL_ID)
+            .setContentTitle("Summary Noti Title")
+            .setContentText("new message")
+            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setGroup(NOTI_GROUP_ID)
+            .setGroupSummary(true)
+
+        //.setOnlyAlertOnce(true)
+
+        NotificationManagerCompat.from(this).apply{
+            notify((System.currentTimeMillis()/1000).toInt(), notificationBuilder.build())
+            notify(123, notiSummaryBuilder.build())
+        }
+        
+        // TODO : 그룹 noti의 경우 맨 첫번째 notification 그룹에 안들어가는 이유 찾기...
     }
 /*
     private fun sendDataMessageWithStyle(data: MutableMap<String, String>){

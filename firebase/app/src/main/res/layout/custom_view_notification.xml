@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Remote view는 constraint layout 지원X -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_custion_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Title Area"
+        android:textSize="25sp"
+        style="@style/TextAppearance.Compat.Notification.Title" />
+    <TextView
+        android:id="@+id/tv_custion_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Message Area"
+        android:textSize="15sp"
+        style="@style/TextAppearance.Compat.Notification" />
+</LinearLayout>

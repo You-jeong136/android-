@@ -78,7 +78,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         notificationBuilder.setContentTitle(notification.title)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setContentText(notification.body)
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
 
@@ -134,7 +133,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setSubText("SubText 줄")
             .setContentText(data["message"])
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
             .setGroup(NOTI_GROUP_ID)
@@ -175,7 +173,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             notify((System.currentTimeMillis()/1000).toInt(), notificationBuilder.build())
             notify(123, notiSummaryBuilder.build())
         }
-        
+
         // TODO : 그룹 noti의 경우 맨 첫번째 notification 그룹에 안들어가는 이유 찾기...
     }
 /*
@@ -197,7 +195,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             .setContentTitle(data["title"])
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setContentText(data["message"])
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
 

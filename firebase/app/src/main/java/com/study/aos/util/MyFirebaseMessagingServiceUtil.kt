@@ -1,6 +1,5 @@
-package com.study.aos
+package com.study.aos.util
 
-import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -11,7 +10,6 @@ import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.util.Log
-import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
@@ -19,12 +17,11 @@ import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.bumptech.glide.request.transition.Transition
 import androidx.core.app.NotificationManagerCompat
+import com.study.aos.ui.MainActivity
+import com.study.aos.R
 
 
-
-
-
-class MyFirebaseMessagingService : FirebaseMessagingService() {
+class MyFirebaseMessagingServiceUtil : FirebaseMessagingService() {
 
     // 메세지 수신 시 마다 해당 메소드 호출됨.
     override fun onMessageReceived(remoteMessage: RemoteMessage){

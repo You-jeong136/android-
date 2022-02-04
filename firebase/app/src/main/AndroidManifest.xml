@@ -34,7 +34,7 @@
 
 
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -45,7 +45,7 @@
 
         <!-- 백 외에 포그라운드에서도 알림 수신 등을 하기 위해 firebaseMessagingService 상속하는 서비스 필요 -->
         <service
-            android:name=".MyFirebaseMessagingService"
+            android:name=".util.MyFirebaseMessagingServiceUtil"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>

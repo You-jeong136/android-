@@ -4,7 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".MainActivity"
+    tools:context=".ui.MainActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -17,6 +17,7 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:background="#00FFFFFF"
+          android:elevation="0dp"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent">
 
@@ -59,8 +60,14 @@
    <com.google.android.material.navigation.NavigationView
        android:layout_width="match_parent"
        android:layout_height="match_parent"
-       android:layout_gravity="start"
-       app:headerLayout="@layout/drawer_header"
-       app:menu="@menu/menu_toolbar"/>
+       android:layout_gravity="start">
+
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+         android:textColor="@color/white"
+         android:text="어라일어"
+         android:textSize="50sp"/>
+   </com.google.android.material.navigation.NavigationView>
 
 </androidx.drawerlayout.widget.DrawerLayout>

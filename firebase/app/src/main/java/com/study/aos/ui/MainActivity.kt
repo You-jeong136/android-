@@ -3,14 +3,12 @@ package com.study.aos.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.messaging.FirebaseMessaging
 import com.study.aos.R
 import com.study.aos.databinding.ActivityMainBinding
-import com.study.aos.util.PagerFragmentStateAdapter
+import com.study.aos.ui.remoteconfig.RemoteConfigFragment
 
 class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }

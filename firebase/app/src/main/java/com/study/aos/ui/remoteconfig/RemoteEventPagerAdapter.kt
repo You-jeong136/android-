@@ -1,4 +1,4 @@
-package com.study.aos.ui
+package com.study.aos.ui.remoteconfig
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

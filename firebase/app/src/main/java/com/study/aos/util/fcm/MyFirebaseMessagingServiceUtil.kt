@@ -1,4 +1,4 @@
-package com.study.aos.util
+package com.study.aos.util.fcm
 
 import android.app.NotificationChannel
 import android.app.NotificationManager

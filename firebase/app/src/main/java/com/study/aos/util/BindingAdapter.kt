@@ -11,8 +11,8 @@ object BindingAdapters {
     fun setSrcFromUrl(imageView: ImageView, url: String) {
         Glide.with(imageView.context)
             .load(url)
+            .fitCenter()
             .into(imageView)
     }
-
 
 }

@@ -1,6 +1,7 @@
 package com.study.aos.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -8,9 +9,15 @@ import android.view.ViewGroup
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.ktx.remoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
-import com.study.aos.R
 import com.study.aos.data.RemoteEvent
 import com.study.aos.databinding.FragmentRemoteConfigBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
+import org.json.JSONArray
+import org.json.JSONObject
+import kotlin.math.absoluteValue
 
 class RemoteConfigFragment : Fragment() {
 
@@ -23,30 +30,58 @@ class RemoteConfigFragment : Fragment() {
     ): View? {
         _binding = FragmentRemoteConfigBinding.inflate(inflater, container, false)
 
-        initAdapter()
+        CoroutineScope(Dispatchers.Main).launch {
+            val events = initData()
+            if(events.isNotEmpty())
+                initAdapter(events)
+        }
 
         return binding.root
     }
 
-    private fun initAdapter(){
+    private fun initAdapter(events : List<RemoteEvent>){
         val remoteEventPagerAdapter = RemoteEventPagerAdapter()
-        remoteEventPagerAdapter.setRemoteEvent(
-            listOf(
-                RemoteEvent("https://media.vlpt.us/images/yujeong136/post/31c0ffb3-e52a-4a4c-b5c1-05a63e7f4c20/Android%20Logo.PNG", "이벤트1"),
-                RemoteEvent("https://media.vlpt.us/images/yujeong136/post/31c0ffb3-e52a-4a4c-b5c1-05a63e7f4c20/Android%20Logo.PNG", "이벤트2")
-            )
-        )
+        remoteEventPagerAdapter.setRemoteEvent(events)
         binding.vpRemoteBanner.adapter = remoteEventPagerAdapter
     }
 
-    private fun initData(){
+    suspend fun initData() : List<RemoteEvent>{
         val remoteConfig = Firebase.remoteConfig
-
-        //server에서 block 하지 않는 이상 계속 fetch 할 수 있도록.
+        var events = emptyList<RemoteEvent>()
+        //server에서 block 하지 않는 이상 계속 fetch 할 수 있도록 인터벌 0으로 설정
         remoteConfig.setConfigSettingsAsync(
             remoteConfigSettings {
+                // 연습하느라 0으로 줬지만, 권장은 최소 1시간 _ 60분 _ 3600초
                 minimumFetchIntervalInSeconds = 0
             }
         )
+
+        remoteConfig.fetchAndActivate().addOnCompleteListener {
+            if(it.isSuccessful){
+                events = parseEventsJson(remoteConfig.getString("remoteEvent"))
+            }
+        }.addOnFailureListener {
+            Log.d("******REMOTE_CONFIG_FAILURE", it.stackTrace.toString())
+        }.await()
+
+        return events
     }
+
+    private fun parseEventsJson(json: String): List<RemoteEvent> {
+        val jsonArray = JSONArray(json)
+        var jsonList = emptyList<JSONObject>()
+
+        for(i in 0 until jsonArray.length()){
+            jsonArray.getJSONObject(i)?.let {
+                jsonList = jsonList + it
+            }
+
+        }
+
+        return jsonList.map {
+            RemoteEvent( imageUrl = it.getString("imageUrl"),
+                        name = it.getString("name"))
+        }
+    }
+
 }

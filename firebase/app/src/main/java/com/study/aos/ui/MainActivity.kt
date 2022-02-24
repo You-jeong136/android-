@@ -8,6 +8,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.firebase.messaging.FirebaseMessaging
 import com.study.aos.R
 import com.study.aos.databinding.ActivityMainBinding
+import com.study.aos.ui.auth.AuthGoogleFragment
 import com.study.aos.ui.remoteconfig.RemoteConfigFragment
 
 class MainActivity : AppCompatActivity() {
@@ -38,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction().add(R.id.fl_home_main, RemoteConfigFragment()).commit();
 
         binding.tlMain.addTab(binding.tlMain.newTab().setText(getString(R.string.main_tab_config)))
-        binding.tlMain.addTab(binding.tlMain.newTab().setText("EMPTY"))
+        binding.tlMain.addTab(binding.tlMain.newTab().setText("Auth Google"))
         binding.tlMain.addTab(binding.tlMain.newTab().setText("EMPTY"))
         binding.tlMain.addTab(binding.tlMain.newTab().setText("EMPTY"))
 
@@ -46,7 +47,7 @@ class MainActivity : AppCompatActivity() {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when(tab!!.position){
                     0 -> changeFragment(RemoteConfigFragment())
-                    1 -> changeFragment(EmptyFragment())
+                    1 -> changeFragment(AuthGoogleFragment())
                     2 -> changeFragment(EmptyFragment())
                     3 -> changeFragment(EmptyFragment())
                 }

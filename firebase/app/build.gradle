@@ -54,7 +54,7 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-messaging-ktx'
     implementation 'com.google.firebase:firebase-config-ktx'
-    implementation 'com.firebaseui:firebase-ui-auth-ktx'
+    implementation 'com.google.firebase:firebase-auth-ktx'
 
     //google _ auth
     implementation 'com.google.android.gms:play-services-auth:20.1.0'

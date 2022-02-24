@@ -11,21 +11,35 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.study.aos.util.NestedScrollableHost
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vp_remote_banner"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="0dp"
+            android:padding="30dp"
+            android:layout_marginBottom="10dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:overScrollMode="never"
+            app:layout_constraintBottom_toTopOf="@id/ll_remote"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/vp_remote_banner"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
-
-        </com.study.aos.util.NestedScrollableHost>
+        <LinearLayout
+            android:id="@+id/ll_remote"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/vp_remote_banner"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:padding="15dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 
 

@@ -3,6 +3,9 @@ package com.study.aos.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.FrameLayout
+import androidx.fragment.app.Fragment
+import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.messaging.FirebaseMessaging
 import com.study.aos.R
@@ -34,8 +37,31 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initTab(){
+        supportFragmentManager.beginTransaction().add(R.id.fl_home_main, RemoteConfigFragment()).commit();
 
-        val pagerAdapter = PagerFragmentStateAdapter(this)
+        binding.tlMain.addTab(binding.tlMain.newTab().setText(getString(R.string.main_tab_config)))
+        binding.tlMain.addTab(binding.tlMain.newTab().setText("EMPTY"))
+        binding.tlMain.addTab(binding.tlMain.newTab().setText("EMPTY"))
+        binding.tlMain.addTab(binding.tlMain.newTab().setText("EMPTY"))
+
+        binding.tlMain.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                when(tab!!.position){
+                    0 -> changeFragment(RemoteConfigFragment())
+                    1 -> changeFragment(EmptyFragment())
+                    2 -> changeFragment(EmptyFragment())
+                    3 -> changeFragment(EmptyFragment())
+                }
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+            }
+        })
+
+        /*val pagerAdapter = PagerFragmentStateAdapter(this)
         pagerAdapter.addFragment(RemoteConfigFragment())
         pagerAdapter.addFragment(EmptyFragment())
         pagerAdapter.addFragment(EmptyFragment())
@@ -51,7 +77,15 @@ class MainActivity : AppCompatActivity() {
                 2 -> tab.text =  String.format(empty, position)
                 3 -> tab.text =  String.format(empty, position)
             }
-        }.attach()
+        }.attach()*/
 
+    }
+
+    private fun changeFragment(fragment: Fragment) {
+        Log.d("fragmentChangd", fragment.toString())
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fl_home_main, fragment)
+            .commit()
     }
 }

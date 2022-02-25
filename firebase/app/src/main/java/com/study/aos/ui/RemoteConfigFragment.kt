@@ -9,6 +9,7 @@ import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
+import androidx.viewpager2.widget.ViewPager2
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.ktx.remoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
@@ -34,38 +35,25 @@ class RemoteConfigFragment : Fragment() {
     ): View? {
         _binding = FragmentRemoteConfigBinding.inflate(inflater, container, false)
 
+        initData()
         initView()
-
-        CoroutineScope(Dispatchers.Main).launch {
-            val events = initData()
-            if(events.isNotEmpty())
-                initAdapter(events)
-        }
 
         return binding.root
     }
 
     private fun initView(){
         //뷰페이저 _ 효과주기 연습1 -> 페이지 넘길 때 이전이나 이후 페이지가 옅게 보이게 만들기
-        binding.vpRemoteBanner.setPageTransformer{ page, position ->
-            when{
-                position.absoluteValue >= 1.0F -> {
-                    page.alpha = 0F
-                } position== 0F -> {
-                    page.alpha = 1F
-                } else -> {
-                    page.alpha = 1F - position.absoluteValue * 2
-                }
-            }
+        val animaTransformer = ViewPager2.PageTransformer{ page, position ->
+            val r = 1 - abs(position)
+            page.alpha = 0.8f + r
+            page.scaleY =  0.85f + r * 0.15f
         }
 
-        //뷰페이저 _ 효과주기 연습2 ->  미리보기 액자
         //viewpager xml에서 clipChlidren이랑 clipToPadding false로 주기.
         val compositePageTransformer = CompositePageTransformer()
-        compositePageTransformer.addTransformer(MarginPageTransformer(20))
-        compositePageTransformer.addTransformer { view: View, fl: Float ->
-            val v = 1 - abs(fl)
-            view.scaleY = 0.8f + v * 0.2f
+        compositePageTransformer.apply {
+            addTransformer(MarginPageTransformer(20))
+            addTransformer(animaTransformer)
         }
 
         binding.vpRemoteBanner.offscreenPageLimit = 3
@@ -82,7 +70,7 @@ class RemoteConfigFragment : Fragment() {
         binding.vpRemoteBanner.setCurrentItem(remoteEventPagerAdapter.itemCount / 2, false)
     }
 
-    suspend fun initData() : List<RemoteEvent>{
+    private fun initData() {
         val remoteConfig = Firebase.remoteConfig
         var events = emptyList<RemoteEvent>()
         //server에서 block 하지 않는 이상 계속 fetch 할 수 있도록 인터벌 0으로 설정
@@ -96,12 +84,11 @@ class RemoteConfigFragment : Fragment() {
         remoteConfig.fetchAndActivate().addOnCompleteListener {
             if(it.isSuccessful){
                 events = parseEventsJson(remoteConfig.getString("remoteEvent"))
+                initAdapter(events)
             }
         }.addOnFailureListener {
             Log.d("******REMOTE_CONFIG_FAILURE", it.stackTrace.toString())
-        }.await()
-
-        return events
+        }
     }
 
     private fun parseEventsJson(json: String): List<RemoteEvent> {

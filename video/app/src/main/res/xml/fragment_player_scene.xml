@@ -33,12 +33,12 @@
             android:layout_width="0dp"
             android:layout_height="56dp"
             motion:layout_constraintVertical_bias="1.0"
-            android:layout_marginBottom="66dp"
+            android:layout_marginBottom="56dp"
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintTop_toTopOf="parent"
             motion:layout_constraintStart_toStartOf="parent" />
         <Constraint
-            android:id="@+id/iv_player_view"
+            android:id="@+id/exo_player_view"
             android:layout_width="0dp"
             android:layout_height="0dp"
             motion:layout_constraintDimensionRatio="H,1:2.5"
@@ -49,7 +49,7 @@
 
     <ConstraintSet android:id="@+id/end">
         <Constraint
-            android:id="@+id/iv_player_view"
+            android:id="@+id/exo_player_view"
             android:layout_width="0dp"
             android:layout_height="0dp"
             motion:layout_constraintEnd_toEndOf="@id/cl_player_main"

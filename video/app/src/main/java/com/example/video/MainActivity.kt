@@ -25,7 +25,11 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.fl_container_home, PlayerFragment())
             .commit()
 
-        videoAdapter = VideoAdapter()
+        videoAdapter = VideoAdapter(callback = {url, title ->
+            supportFragmentManager.fragments.find{it is PlayerFragment}?.let{
+                (it as PlayerFragment ).play(url, title)
+            }
+        })
         findViewById<RecyclerView>(R.id.rv_home).apply {
             adapter = videoAdapter
             layoutManager = LinearLayoutManager(context)

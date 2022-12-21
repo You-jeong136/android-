@@ -17,11 +17,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <!-- exo player-->
-    <ImageView
-        android:id="@+id/iv_player_view"
+    <com.google.android.exoplayer2.ui.PlayerView
+        android:id="@+id/exo_player_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/design_default_color_secondary"
         app:layout_constraintBottom_toBottomOf="@id/cl_player_main"
         app:layout_constraintStart_toStartOf="@id/cl_player_main"
         app:layout_constraintTop_toTopOf="@id/cl_player_main" />
@@ -46,14 +45,17 @@
         android:singleLine="true"
         app:layout_constraintBottom_toBottomOf="@id/iv_bottom_player_btn"
         app:layout_constraintEnd_toEndOf="@id/iv_bottom_player_btn"
-        app:layout_constraintStart_toEndOf="@id/iv_player_view"
+        app:layout_constraintStart_toEndOf="@id/exo_player_view"
         app:layout_constraintTop_toTopOf="@id/iv_bottom_player_btn" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/rv_player"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/white"
+        android:nestedScrollingEnabled="false"
+        android:padding="16dp"
+        android:clipToPadding="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

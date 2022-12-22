@@ -94,12 +94,14 @@
        android:clickable="false"
        android:thumb="@color/purple_200"/>
    <SeekBar
-       android:id="@+id/sb_play"
+       android:id="@+id/sb_player"
        android:layout_width="0dp"
        android:layout_height="wrap_content"
        app:layout_constraintEnd_toEndOf="parent"
        app:layout_constraintStart_toStartOf="parent"
        app:layout_constraintBottom_toTopOf="@id/pv_player"
+       android:progressDrawable="@drawable/bg_player_seek"
+       android:progress="40"
        android:layout_marginStart="50dp"
        android:layout_marginEnd="50dp"
        android:layout_marginBottom="30dp"

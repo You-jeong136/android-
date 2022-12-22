@@ -12,6 +12,7 @@ import com.example.video.databinding.FragmentPlayerBinding
 import com.example.video.dto.VideoDto
 import com.example.video.service.VideoService
 import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
@@ -38,6 +39,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player) {
         initMotionLayoutEvent((fragmentPlayerBinding))
         initRecyclerView(fragmentPlayerBinding)
         initPlayer(fragmentPlayerBinding)
+        initControlButton(fragmentPlayerBinding)
 
         getVideoList()
     }
@@ -83,6 +85,30 @@ class PlayerFragment : Fragment(R.layout.fragment_player) {
             player = SimpleExoPlayer.Builder(it).build()
         }
         fragmentPlayerBinding.exoPlayerView.player = player
+        binding?.let {
+            player?.addListener(object : Player.EventListener{
+                override fun onIsPlayingChanged(isPlaying: Boolean) {
+                    super.onIsPlayingChanged(isPlaying)
+                    if(isPlaying){
+                        it.ivBottomPlayerBtn.setImageResource(R.drawable.ic_baseline_pause_24)
+                    } else {
+                        it.ivBottomPlayerBtn.setImageResource(R.drawable.ic_baseline_play_arrow_24)
+                    }
+                }
+            })
+        }
+
+    }
+
+    private fun initControlButton(fragmentPlayerBinding: FragmentPlayerBinding){
+        fragmentPlayerBinding.ivBottomPlayerBtn.setOnClickListener{
+            val player = this.player ?: return@setOnClickListener
+            if(player.isPlaying){
+                player.pause()
+            } else {
+                player.play()
+            }
+        }
     }
 
 

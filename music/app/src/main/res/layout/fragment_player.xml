@@ -5,6 +5,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+
+   <androidx.constraintlayout.widget.Group
+      android:id="@+id/vg_player"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+      app:constraint_referenced_ids="tv_track, tv_artist, cv_cover, v_bottom_background, sb_player,
+      tv_playtime, tv_totaltime"
+       tools:visibility="gone"
+       android:visibility="gone"/>
+
+   <androidx.constraintlayout.widget.Group
+       android:id="@+id/vg_playlist"
+       android:layout_width="wrap_content"
+       app:constraint_referenced_ids="tv_title, rv_playlisy, sb_playlist"
+       android:layout_height="wrap_content"
+       android:visibility="visible"/>
+
    <View
        android:id="@+id/v_top_background"
        android:layout_width="0dp"
@@ -41,7 +58,20 @@
        tools:text="문어의 꿈"/>
 
    <TextView
-       android:id="@+id/tv_track2"
+       android:id="@+id/tv_title"
+       android:text="@string/string_playlist"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       android:layout_marginTop="30dp"
+       android:textColor="@color/white"
+       android:textSize="20sp"
+       android:textStyle="bold" />
+
+   <TextView
+       android:id="@+id/tv_artist"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        android:layout_marginTop="3dp"
@@ -65,13 +95,23 @@
        app:cardElevation="10dp"
        app:cardCornerRadius="15dp">
 
-       <ImageView
-           android:id="@+id/iv_cover"
-           android:layout_width="match_parent"
-           android:layout_height="match_parent"
-           tools:background="@color/purple_200"/>
+      <ImageView
+          android:id="@+id/iv_cover"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          tools:background="@color/purple_200" />
 
    </androidx.cardview.widget.CardView>
+
+   <androidx.recyclerview.widget.RecyclerView
+       android:id="@+id/rv_playlisy"
+       android:layout_width="0dp"
+       android:layout_height="0dp"
+       app:layout_constraintBottom_toTopOf="@id/pv_player"
+       app:layout_constraintTop_toBottomOf="@id/tv_title"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintEnd_toEndOf="parent" />
+
    <com.google.android.exoplayer2.ui.PlayerView
        android:id="@+id/pv_player"
        android:layout_width="0dp"
@@ -97,11 +137,14 @@
        android:id="@+id/sb_player"
        android:layout_width="0dp"
        android:layout_height="wrap_content"
+       android:maxHeight="4dp"
+       android:minHeight="4dp"
        app:layout_constraintEnd_toEndOf="parent"
        app:layout_constraintStart_toStartOf="parent"
        app:layout_constraintBottom_toTopOf="@id/pv_player"
        android:progressDrawable="@drawable/bg_player_seek"
-       android:progress="40"
+       android:thumb="@drawable/thumb_player_seek"
+       tools:progress="40"
        android:layout_marginStart="50dp"
        android:layout_marginEnd="50dp"
        android:layout_marginBottom="30dp"
@@ -109,6 +152,28 @@
        android:paddingEnd="0dp" />
 
 
+   <TextView
+      android:id="@+id/tv_playtime"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       app:layout_constraintStart_toStartOf="@id/sb_player"
+       app:layout_constraintTop_toBottomOf="@id/sb_player"
+       android:layout_marginTop="4dp"
+       android:textColor="@color/purple_200"
+       android:textStyle="bold"
+       tools:text="0:00"
+       />
+
+   <TextView
+       android:id="@+id/tv_totaltime"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       app:layout_constraintEnd_toEndOf="@id/sb_player"
+       app:layout_constraintTop_toBottomOf="@id/sb_player"
+       android:layout_marginTop="4dp"
+       android:textColor="@color/gray_97"
+       android:textStyle="bold"
+       tools:text="0:00"/>
 
    <ImageView
        android:id="@+id/iv_play_control"

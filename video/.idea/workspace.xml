@@ -10,13 +10,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f70892b8-9f4c-499f-8ab5-526b46a08553" name="Changes" comment="[feat] exoplayer 연결">
-      <change afterPath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_baseline_pause_24.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_baseline_play_arrow_24.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../music/app/src/main/java/com/example/music/MusicModel.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../music/app/src/main/java/com/example/music/MusicModelMapper.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../music/app/src/main/java/com/example/music/PlayListAdapter.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../music/app/src/main/java/com/example/music/service/MusicDto.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../music/app/src/main/java/com/example/music/service/MusicEntity.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../music/app/src/main/java/com/example/music/service/MusicService.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../music/app/src/main/res/drawable/thumb_player_seek.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../music/app/src/main/res/layout/item_music.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../music/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../music/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../music/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../music/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../music/app/src/main/java/com/example/music/PlayerFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../music/app/src/main/java/com/example/music/PlayerFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../music/app/src/main/res/layout/fragment_player.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../music/app/src/main/res/layout/fragment_player.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../music/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../music/app/src/main/res/values/strings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/video/PlayerFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/video/PlayerFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_player.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_player.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/xml/fragment_player_scene.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/xml/fragment_player_scene.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
